@@ -11,14 +11,14 @@ firebase_config = {
     "measurementId": "G-CJGTJTBTSB",
 }
 
-# HTML and JavaScript for Firebase Authentication
+# JavaScript code to initialize Firebase and handle authentication
 html_code = f"""
 <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
 <script>
   const firebaseConfig = {firebase_config};
   firebase.initializeApp(firebaseConfig);
-  
+
   function signUp(email, password) {{
     firebase.auth().createUserWithEmailAndPassword(email, password)
       .then((userCredential) => {{
