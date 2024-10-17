@@ -13,9 +13,12 @@ config = {
 }
 
 # Initialize Firebase
-firebase = pyrebase.initialize_app(config)
-auth = firebase.auth()
-db = firebase.database()
+try:
+    firebase = pyrebase.initialize_app(config)
+    auth = firebase.auth()
+    db = firebase.database()
+except Exception as e:
+    st.error(f"Failed to initialize Firebase: {e}")
 
 # Streamlit app
 st.title("Firebase Auth with Streamlit")
@@ -37,7 +40,7 @@ def sign_up():
             db.child("users").child(user['localId']).set(user_data)
             st.success("Sign up successful! Please log in.")
         except Exception as e:
-            st.error(f"Error: {e}")
+            st.error(f"Error during sign up: {e}")
 
 # Function to sign in users
 def sign_in():
@@ -56,7 +59,7 @@ def sign_in():
             else:
                 st.write("No user data found.")
         except Exception as e:
-            st.error(f"Error: {e}")
+            st.error(f"Error during sign in: {e}")
 
 # Main function to toggle between sign-up and sign-in
 def main():
