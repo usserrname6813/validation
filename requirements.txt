@@ -3,3 +3,5 @@ pyrebase4
 firebase-admin
 pillow==9.5.0
 altair==4.2.0
+pillow
+
