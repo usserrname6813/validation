@@ -23,11 +23,11 @@ html_code = f"""
     firebase.auth().createUserWithEmailAndPassword(email, password)
       .then((userCredential) => {{
         const user = userCredential.user;
-        window.alert("Successfully signed up: " + user.email);
+        alert("Successfully signed up: " + user.email);
       }})
       .catch((error) => {{
         const errorMessage = error.message;
-        window.alert("Sign Up failed: " + errorMessage);
+        alert("Sign Up failed: " + errorMessage);
       }});
   }}
 
@@ -35,11 +35,11 @@ html_code = f"""
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then((userCredential) => {{
         const user = userCredential.user;
-        window.alert("Welcome " + user.email + "!");
+        alert("Welcome " + user.email + "!");
       }})
       .catch((error) => {{
         const errorMessage = error.message;
-        window.alert("Sign In failed: " + errorMessage);
+        alert("Sign In failed: " + errorMessage);
       }});
   }}
 </script>
@@ -66,3 +66,9 @@ if st.button("Sign In"):
         st.components.v1.html(f'<script>signIn("{email}", "{password}");</script>', height=0)
     else:
         st.warning("Please enter both email and password.")
+
+# Additional feedback to users
+if st.session_state.get('logged_in'):
+    st.success(f"Welcome back, {email}!")
+else:
+    st.info("Please sign up or sign in.")
