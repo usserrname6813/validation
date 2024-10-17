@@ -1,3 +1,5 @@
 streamlit
 pyrebase
 firebase-admin
+oauth2client
+pycryptodome  # Add this to replace pycrypto if necessary
