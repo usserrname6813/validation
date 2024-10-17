@@ -2,3 +2,4 @@ streamlit==1.22.0  # Specify your Streamlit version
 requests==2.28.1    # Example of specifying a version
 pyrebase4==4.5.0    # Example version for Pyrebase
 firebase-admin==5.3.0 # Example version for Firebase Admin
+requests-toolbelt
