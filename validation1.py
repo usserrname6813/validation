@@ -2,8 +2,8 @@ import streamlit as st
 import firebase_admin
 from firebase_admin import credentials, auth, db
 
-# Initialize Firebase
-cred = credentials.Certificate("firebase-adminsdk.json")  # Adjust the path as needed
+# Initialize Firebase with the correct path to the JSON file
+cred = credentials.Certificate("validation-39585-firebase-adminsdk-70ppy-e489e5b197.json")
 firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://validation-39585-default-rtdb.firebaseio.com/'
 })
@@ -15,7 +15,7 @@ st.title("Firebase Authentication Example")
 def sign_up(email, password):
     try:
         user = auth.create_user_with_email_and_password(email, password)
-        st.success(f'Successfully signed up: {user.email}')
+        st.success(f'Successfully signed up: {user["email"]}')
     except Exception as e:
         st.error(f'Sign Up failed: {str(e)}')
 
