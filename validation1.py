@@ -37,7 +37,13 @@ html_code = f"""
       }})
       .catch((error) => {{
         const errorMessage = error.message;
-        alert("Sign Up failed: " + errorMessage);
+        if (errorMessage.includes("The email address is badly formatted")) {{
+          alert("Invalid email format.");
+        }} else if (errorMessage.includes("password")) {{
+          alert("Password does not meet the requirements: " + errorMessage);
+        }} else {{
+          alert("Sign Up failed: " + errorMessage);
+        }}
       }});
   }}
 
@@ -54,7 +60,13 @@ html_code = f"""
       }})
       .catch((error) => {{
         const errorMessage = error.message;
-        alert("Sign In failed: " + errorMessage);
+        if (errorMessage.includes("There is no user record corresponding to this identifier.")) {{
+          alert("No account found with this email.");
+        }} else if (errorMessage.includes("password")) {{
+          alert("Password is incorrect or does not meet the requirements: " + errorMessage);
+        }} else {{
+          alert("Sign In failed: " + errorMessage);
+        }}
       }});
   }}
 </script>
