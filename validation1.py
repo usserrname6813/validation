@@ -19,11 +19,21 @@ html_code = f"""
   const firebaseConfig = {firebase_config};
   firebase.initializeApp(firebaseConfig);
 
+  function isValidEmail(email) {{
+    const re = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;  // Simple regex for email validation
+    return re.test(email);
+  }}
+
   function signUp(email, password) {{
+    if (!isValidEmail(email)) {{
+      alert("Please enter a valid email address.");
+      return;
+    }}
     firebase.auth().createUserWithEmailAndPassword(email, password)
       .then((userCredential) => {{
         const user = userCredential.user;
         alert("Successfully signed up: " + user.email);
+        window.location.reload();  // Reload the page to update UI
       }})
       .catch((error) => {{
         const errorMessage = error.message;
@@ -32,10 +42,15 @@ html_code = f"""
   }}
 
   function signIn(email, password) {{
+    if (!isValidEmail(email)) {{
+      alert("Please enter a valid email address.");
+      return;
+    }}
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then((userCredential) => {{
         const user = userCredential.user;
         alert("Welcome " + user.email + "!");
+        window.location.reload();  // Reload the page to update UI
       }})
       .catch((error) => {{
         const errorMessage = error.message;
@@ -66,9 +81,3 @@ if st.button("Sign In"):
         st.components.v1.html(f'<script>signIn("{email}", "{password}");</script>', height=0)
     else:
         st.warning("Please enter both email and password.")
-
-# Additional feedback to users
-if st.session_state.get('logged_in'):
-    st.success(f"Welcome back, {email}!")
-else:
-    st.info("Please sign up or sign in.")
