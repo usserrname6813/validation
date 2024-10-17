@@ -13,8 +13,8 @@ firebase_config = {
 
 # JavaScript code to initialize Firebase and handle authentication
 html_code = f"""
-<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
 <script>
   const firebaseConfig = {firebase_config};
   firebase.initializeApp(firebaseConfig);
@@ -37,6 +37,7 @@ html_code = f"""
       }})
       .catch((error) => {{
         const errorMessage = error.message;
+        console.error("Sign Up Error:", error); // Log error details
         if (errorMessage.includes("The email address is badly formatted")) {{
           alert("Invalid email format.");
         }} else if (errorMessage.includes("password")) {{
@@ -60,6 +61,7 @@ html_code = f"""
       }})
       .catch((error) => {{
         const errorMessage = error.message;
+        console.error("Sign In Error:", error); // Log error details
         if (errorMessage.includes("There is no user record corresponding to this identifier.")) {{
           alert("No account found with this email.");
         }} else if (errorMessage.includes("password")) {{
